@@ -6,7 +6,12 @@
   "block.toastymod.toasty_mineral_ore" : "Toasty Mineral Ore",
   "block.toastymod.deepslate_toasty_mineral_ore" : "Deepslate Toasty Mineral Ore",
 
+  "item.toastymod.menu" : "Menu",
+
   "item.toastymod.starter_sword" : "Starter Sword",
+  "item.toastymod.decaying_drumstick" : "Decaying Drumstick",
+  "item.toastymod.flimsy_rapier" : "Flimsy Rapier",
+  "item.toastymod.crystal_javelin" : "Crystal Javelin",
 
   "itemGroup.toastytab": "Toasty Mod Tab"
 }

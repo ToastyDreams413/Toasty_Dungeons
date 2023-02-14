@@ -1,0 +1,6 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "toastymod:item/decaying_drumstick"
+  }
+}
