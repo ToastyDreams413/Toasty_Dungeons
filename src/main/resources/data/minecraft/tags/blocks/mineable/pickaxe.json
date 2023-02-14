@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "toastymod:toasty_mineral_ore",
+    "toastymod:toasty_mineral_block",
+    "toastymod:deepslate_toasty_mineral_ore"
+  ]
+}

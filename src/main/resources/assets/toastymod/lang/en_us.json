@@ -1,0 +1,12 @@
+{
+  "item.toastymod.toasty_mineral": "Toasty Mineral",
+  "item.toastymod.raw_toasty_mineral": "Raw Toasty Mineral",
+
+  "block.toastymod.toasty_mineral_block" : "Block of Toasty Mineral",
+  "block.toastymod.toasty_mineral_ore" : "Toasty Mineral Ore",
+  "block.toastymod.deepslate_toasty_mineral_ore" : "Deepslate Toasty Mineral Ore",
+
+  "item.toastymod.starter_sword" : "Starter Sword",
+
+  "itemGroup.toastytab": "Toasty Mod Tab"
+}

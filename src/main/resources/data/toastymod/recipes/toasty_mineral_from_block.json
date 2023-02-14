@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "toastymod:toasty_mineral_block"
+    }
+  ],
+  "result": {
+    "item": "toastymod:toasty_mineral",
+    "count": 9
+  }
+}
