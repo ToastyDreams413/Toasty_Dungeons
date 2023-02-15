@@ -1,6 +1,7 @@
 package net.jackchang.toastymod.item;
 
 import net.jackchang.toastymod.ToastyMod;
+import net.jackchang.toastymod.item.custom.CustomBow;
 import net.jackchang.toastymod.item.custom.CustomSword;
 import net.jackchang.toastymod.item.custom.MenuItem;
 import net.minecraft.world.item.BowItem;
@@ -45,7 +46,7 @@ public class ModItems {
                     "A javelin that can be thrown pretty far, and was once the main weapon of the Crystal Assassin."));
     // bows
     public static final RegistryObject<BowItem> STARTER_BOW = ITEMS.register("starter_bow",
-            () -> new BowItem(new Item.Properties().tab(ModCreativeModeTab.TOASTY_TAB)));
+            () -> new CustomBow(new Item.Properties().tab(ModCreativeModeTab.TOASTY_TAB), "A crappy bow."));
 
     public static class Tiers {
         public static final Tier STARTER = new ForgeTier(2, 800, 1.5f, 3, 350, null,

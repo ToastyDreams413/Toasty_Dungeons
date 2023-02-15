@@ -2,6 +2,7 @@ package net.jackchang.toastymod.events;
 
 import net.jackchang.toastymod.ToastyMod;
 import net.jackchang.toastymod.networking.ModMessages;
+import net.jackchang.toastymod.networking.packet.GivePlayerShillingsC2SPacket;
 import net.jackchang.toastymod.networking.packet.TestC2SPacket;
 import net.jackchang.toastymod.util.KeyBinding;
 import net.minecraft.client.gui.components.toasts.Toast;
@@ -20,6 +21,9 @@ public class ClientEvents {
             if (KeyBinding.SPAWN_COW_KEY.consumeClick()) {
                 ModMessages.sendToServer(new TestC2SPacket());
             }
+            if (KeyBinding.GAIN_SHILLING_KEY.consumeClick()) {
+                ModMessages.sendToServer(new GivePlayerShillingsC2SPacket());
+            }
         }
     }
 
@@ -28,6 +32,7 @@ public class ClientEvents {
         @SubscribeEvent
         public static void onKeyRegister(RegisterKeyMappingsEvent event) {
             event.register(KeyBinding.SPAWN_COW_KEY);
+            event.register(KeyBinding.GAIN_SHILLING_KEY);
         }
     }
 

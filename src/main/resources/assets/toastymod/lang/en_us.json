@@ -16,5 +16,6 @@
   "itemGroup.toastytab": "Toasty Mod Tab",
 
   "key.category.toastymod.toasty" : "Toasty Mod",
-  "key.toastymod.spawn_cow" : "Summon Cow"
+  "key.toastymod.spawn_cow" : "Summon Cow",
+  "key.toastymod.gain_shilling" : "Gain Shilling"
 }
