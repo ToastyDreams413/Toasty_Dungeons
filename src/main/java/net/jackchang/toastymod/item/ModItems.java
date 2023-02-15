@@ -1,13 +1,9 @@
 package net.jackchang.toastymod.item;
 
 import net.jackchang.toastymod.ToastyMod;
-import net.jackchang.toastymod.item.custom.CustomBow;
-import net.jackchang.toastymod.item.custom.CustomSword;
-import net.jackchang.toastymod.item.custom.MenuItem;
-import net.minecraft.world.item.BowItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.SwordItem;
-import net.minecraft.world.item.Tier;
+import net.jackchang.toastymod.item.custom.*;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.common.ForgeTier;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -44,9 +40,26 @@ public class ModItems {
     public static final RegistryObject<SwordItem> CRYSTAL_JAVELIN = ITEMS.register("crystal_javelin",
             () -> new CustomSword(Tiers.STARTER, 5, 3f, new Item.Properties().tab(ModCreativeModeTab.TOASTY_TAB),
                     "A javelin that can be thrown pretty far, and was once the main weapon of the Crystal Assassin."));
+
     // bows
     public static final RegistryObject<BowItem> STARTER_BOW = ITEMS.register("starter_bow",
             () -> new CustomBow(new Item.Properties().tab(ModCreativeModeTab.TOASTY_TAB), "A crappy bow."));
+
+
+    // armors
+    public static final RegistryObject<ArmorItem> STARTER_HELMET = ITEMS.register("starter_helmet",
+            () -> new CustomHelmet(ModArmorMaterials.STARTER_HEAVY, new Item.Properties().tab(ModCreativeModeTab.TOASTY_TAB),
+                    "A very basic standard helmet."));
+    public static final RegistryObject<ArmorItem> STARTER_CHESTPLATE = ITEMS.register("starter_chestplate",
+            () -> new CustomChestplate(ModArmorMaterials.STARTER_HEAVY, new Item.Properties().tab(ModCreativeModeTab.TOASTY_TAB),
+                    "A very basic standard chestplate."));
+    public static final RegistryObject<ArmorItem> STARTER_CHAUSSES = ITEMS.register("starter_chausses",
+            () -> new CustomLeggings(ModArmorMaterials.STARTER_HEAVY, new Item.Properties().tab(ModCreativeModeTab.TOASTY_TAB),
+                    "A very basic standard chausses."));
+    public static final RegistryObject<ArmorItem> STARTER_SABATON = ITEMS.register("starter_sabaton",
+            () -> new CustomBoots(ModArmorMaterials.STARTER_HEAVY, new Item.Properties().tab(ModCreativeModeTab.TOASTY_TAB),
+                    "A very basic standard sabaton."));
+
 
     public static class Tiers {
         public static final Tier STARTER = new ForgeTier(2, 800, 1.5f, 3, 350, null,

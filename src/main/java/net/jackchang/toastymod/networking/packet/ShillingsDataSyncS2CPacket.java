@@ -24,6 +24,7 @@ public class ShillingsDataSyncS2CPacket {
     public boolean handle(Supplier<NetworkEvent.Context> supplier) {
         NetworkEvent.Context context = supplier.get();
         context.enqueueWork(() -> {
+            // this is on the client
             ClientShillingsData.set(shillings);
         });
         return true;

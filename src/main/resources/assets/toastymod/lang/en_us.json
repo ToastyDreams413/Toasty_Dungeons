@@ -13,6 +13,13 @@
   "item.toastymod.flimsy_rapier" : "Flimsy Rapier",
   "item.toastymod.crystal_javelin" : "Crystal Javelin",
 
+  "item.toastymod.starter_bow" : "Starter Bow",
+
+  "item.toastymod.starter_helmet" : "Starter Helmet",
+  "item.toastymod.starter_chestplate" : "Starter Chestplate",
+  "item.toastymod.starter_chausses" : "Starter Chausses",
+  "item.toastymod.starter_sabaton" : "Starter Sabaton",
+
   "itemGroup.toastytab": "Toasty Mod Tab",
 
   "key.category.toastymod.toasty" : "Toasty Mod",

@@ -4,6 +4,7 @@ import com.mojang.logging.LogUtils;
 import net.jackchang.toastymod.block.ModBlocks;
 import net.jackchang.toastymod.item.ModItems;
 import net.jackchang.toastymod.networking.ModMessages;
+import net.jackchang.toastymod.util.ModItemProperties;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -27,6 +28,7 @@ public class ToastyMod {
         ModBlocks.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
+        modEventBus.addListener(this::clientSetup);
 
         MinecraftForge.EVENT_BUS.register(this);
     }
@@ -35,6 +37,10 @@ public class ToastyMod {
         event.enqueueWork(() -> {
             ModMessages.register();
         });
+    }
+
+    private void clientSetup(final FMLClientSetupEvent event) {
+        ModItemProperties.addCustomItemProperties();
     }
 
     // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent

@@ -1,0 +1,6 @@
+{
+  "parent": "toastymod:item/starter_bow",
+  "textures": {
+    "layer0": "toastymod:item/starter_bow_pulling_2"
+  }
+}

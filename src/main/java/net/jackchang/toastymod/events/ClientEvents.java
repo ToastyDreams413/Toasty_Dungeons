@@ -9,6 +9,7 @@ import net.minecraft.client.gui.components.toasts.Toast;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
+import net.minecraftforge.client.event.RenderGuiOverlayEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
@@ -34,6 +35,7 @@ public class ClientEvents {
             event.register(KeyBinding.SPAWN_COW_KEY);
             event.register(KeyBinding.GAIN_SHILLING_KEY);
         }
+
     }
 
 }
