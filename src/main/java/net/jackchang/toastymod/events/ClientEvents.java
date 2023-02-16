@@ -1,6 +1,7 @@
 package net.jackchang.toastymod.events;
 
 import net.jackchang.toastymod.ToastyMod;
+import net.jackchang.toastymod.client.ShillingsHudOverlay;
 import net.jackchang.toastymod.networking.ModMessages;
 import net.jackchang.toastymod.networking.packet.GivePlayerShillingsC2SPacket;
 import net.jackchang.toastymod.networking.packet.TestC2SPacket;
@@ -8,6 +9,7 @@ import net.jackchang.toastymod.util.KeyBinding;
 import net.minecraft.client.gui.components.toasts.Toast;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.InputEvent;
+import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.client.event.RenderGuiOverlayEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -34,6 +36,11 @@ public class ClientEvents {
         public static void onKeyRegister(RegisterKeyMappingsEvent event) {
             event.register(KeyBinding.SPAWN_COW_KEY);
             event.register(KeyBinding.GAIN_SHILLING_KEY);
+        }
+
+        @SubscribeEvent
+        public static void registerGuiOverlays(RegisterGuiOverlaysEvent event) {
+            event.registerAboveAll("shillings", ShillingsHudOverlay.HUD_SHILLINGS);
         }
 
     }
