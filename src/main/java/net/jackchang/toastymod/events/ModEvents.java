@@ -3,10 +3,10 @@ package net.jackchang.toastymod.events;
 import net.jackchang.toastymod.ToastyMod;
 import net.jackchang.toastymod.command.GiftCommand;
 import net.jackchang.toastymod.command.WarpCommands;
-import net.jackchang.toastymod.custom_attributes.shillings.PlayerShillings;
-import net.jackchang.toastymod.custom_attributes.shillings.PlayerShillingsProvider;
+import net.jackchang.toastymod.custom_attributes.PlayerData;
+import net.jackchang.toastymod.custom_attributes.PlayerDataProvider;
 import net.jackchang.toastymod.networking.ModMessages;
-import net.jackchang.toastymod.networking.packet.ShillingsDataSyncS2CPacket;
+import net.jackchang.toastymod.networking.packet.PlayerDataSyncS2CPacket;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -35,8 +35,11 @@ public class ModEvents {
     @SubscribeEvent
     public static void onAttachCapabilitiesPlayer(AttachCapabilitiesEvent<Entity> event) {
         if (event.getObject() instanceof Player) {
-            if (!event.getObject().getCapability(PlayerShillingsProvider.PLAYER_SHILLINGS).isPresent()) {
+            /* if (!event.getObject().getCapability(PlayerShillingsProvider.PLAYER_SHILLINGS).isPresent()) {
                 event.addCapability(new ResourceLocation(ToastyMod.MOD_ID, "properties"), new PlayerShillingsProvider());
+            } */
+            if (!event.getObject().getCapability(PlayerDataProvider.PLAYER_DATA).isPresent()) {
+                event.addCapability(new ResourceLocation(ToastyMod.MOD_ID, "properties"), new PlayerDataProvider());
             }
         }
     }
@@ -48,8 +51,14 @@ public class ModEvents {
 
             event.getOriginal().reviveCaps();
 
-            event.getOriginal().getCapability(PlayerShillingsProvider.PLAYER_SHILLINGS).ifPresent(oldStore -> {
+            /*event.getOriginal().getCapability(PlayerShillingsProvider.PLAYER_SHILLINGS).ifPresent(oldStore -> {
                 event.getEntity().getCapability(PlayerShillingsProvider.PLAYER_SHILLINGS).ifPresent(newStore -> {
+                    newStore.copyFrom(oldStore);
+                });
+            });*/
+
+            event.getOriginal().getCapability(PlayerDataProvider.PLAYER_DATA).ifPresent(oldStore -> {
+                event.getEntity().getCapability(PlayerDataProvider.PLAYER_DATA).ifPresent(newStore -> {
                     newStore.copyFrom(oldStore);
                 });
             });
@@ -60,15 +69,19 @@ public class ModEvents {
 
     @SubscribeEvent
     public static void onRegisterCapabilities(RegisterCapabilitiesEvent event) {
-        event.register(PlayerShillings.class);
+        // event.register(PlayerShillings.class);
+        event.register(PlayerData.class);
     }
 
     @SubscribeEvent
     public static void onPlayerJoinWorld(EntityJoinLevelEvent event) {
         if (!event.getLevel().isClientSide()) {
             if (event.getEntity() instanceof ServerPlayer player) {
-                player.getCapability(PlayerShillingsProvider.PLAYER_SHILLINGS).ifPresent(shillings -> {
+                /* player.getCapability(PlayerShillingsProvider.PLAYER_SHILLINGS).ifPresent(shillings -> {
                     ModMessages.sendToPlayer(new ShillingsDataSyncS2CPacket(shillings.getShillings()), player);
+                }); */
+                player.getCapability(PlayerDataProvider.PLAYER_DATA).ifPresent(data -> {
+                    ModMessages.sendToPlayer(new PlayerDataSyncS2CPacket(data), player);
                 });
             }
         }

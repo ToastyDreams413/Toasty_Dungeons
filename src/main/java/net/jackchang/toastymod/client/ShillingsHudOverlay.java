@@ -9,7 +9,7 @@ import net.minecraftforge.client.gui.overlay.IGuiOverlay;
 public class ShillingsHudOverlay {
     public static final IGuiOverlay HUD_SHILLINGS = ((gui, poseStack, partialTick, width, height) -> {
 
-        Minecraft.getInstance().font.draw(poseStack, "Shillings: " + ClientShillingsData.getPlayerShillings(), width / 2 - 90, height / 8 * 7, 16776960);
+        Minecraft.getInstance().font.draw(poseStack, "Shillings: " + ClientPlayerData.getPlayerData().getShillings(), width / 2 - 90, height / 8 * 7, 16776960);
 
     });
 

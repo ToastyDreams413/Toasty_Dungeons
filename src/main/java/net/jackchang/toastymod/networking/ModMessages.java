@@ -2,9 +2,9 @@ package net.jackchang.toastymod.networking;
 
 import net.jackchang.toastymod.ToastyMod;
 import net.jackchang.toastymod.networking.packet.GivePlayerShillingsC2SPacket;
+import net.jackchang.toastymod.networking.packet.PlayerDataSyncS2CPacket;
 import net.jackchang.toastymod.networking.packet.ShillingsDataSyncS2CPacket;
 import net.jackchang.toastymod.networking.packet.TestC2SPacket;
-import net.minecraft.client.gui.components.toasts.Toast;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.network.NetworkDirection;
@@ -46,6 +46,12 @@ public class ModMessages {
                 .decoder(ShillingsDataSyncS2CPacket::new)
                 .encoder(ShillingsDataSyncS2CPacket::toBytes)
                 .consumerMainThread(ShillingsDataSyncS2CPacket::handle)
+                .add();
+
+        net.messageBuilder(PlayerDataSyncS2CPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT)
+                .decoder(PlayerDataSyncS2CPacket::new)
+                .encoder(PlayerDataSyncS2CPacket::toBytes)
+                .consumerMainThread(PlayerDataSyncS2CPacket::handle)
                 .add();
     }
 
