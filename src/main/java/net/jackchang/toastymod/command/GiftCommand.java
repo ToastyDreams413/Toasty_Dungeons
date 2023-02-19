@@ -22,10 +22,10 @@ public class GiftCommand {
     private int giveShillings(CommandSourceStack source, ServerPlayer targetPlayer, int shillings) {
         ServerPlayer originalPlayer = source.getPlayer();
 
+        originalPlayer.sendSystemMessage(Component.literal("You tried to send a shilling!"));
+
         // give shillings to player
-        ModMessages.sendToServer(new GivePlayerShillingsC2SPacket(shillings, targetPlayer));
-        originalPlayer.sendSystemMessage(Component.literal("You have sent " + shillings + " shillings to someone else!"));
-        targetPlayer.sendSystemMessage(Component.literal("You have received " + shillings + " shillings from someone else!"));
+        ModMessages.sendToServer(new GivePlayerShillingsC2SPacket(shillings, targetPlayer.getUUID()));
         return 1;
     }
 
