@@ -10,24 +10,12 @@ import net.minecraft.world.entity.player.Player;
 public class WarpCommands {
 
     public WarpCommands(CommandDispatcher<CommandSourceStack> dispatcher) {
-        dispatcher.register(Commands.literal("lobby").executes((command) -> {
-            return warpLobbyCommand(command.getSource());
-        }));
-        dispatcher.register(Commands.literal("l").executes((command) -> {
-            return warpLobbyCommand(command.getSource());
-        }));
-        dispatcher.register(Commands.literal("warp").then(Commands.literal("lobby").executes((command) -> {
-            return warpLobbyCommand(command.getSource());
-        })));
-        dispatcher.register(Commands.literal("dhub").executes((command) -> {
-            return warpDungeonhubCommand(command.getSource());
-        }));
-        dispatcher.register(Commands.literal("dungeonhub").executes((command) -> {
-            return warpDungeonhubCommand(command.getSource());
-        }));
-        dispatcher.register(Commands.literal("warp").then(Commands.literal("dungeonhub").executes((command) -> {
-            return warpDungeonhubCommand(command.getSource());
-        })));
+        dispatcher.register(Commands.literal("lobby").executes((command) -> warpLobbyCommand(command.getSource())));
+        dispatcher.register(Commands.literal("l").executes((command) -> warpLobbyCommand(command.getSource())));
+        dispatcher.register(Commands.literal("warp").then(Commands.literal("lobby").executes((command) -> warpLobbyCommand(command.getSource()))));
+        dispatcher.register(Commands.literal("dhub").executes((command) -> warpDungeonhubCommand(command.getSource())));
+        dispatcher.register(Commands.literal("dungeonhub").executes((command) -> warpDungeonhubCommand(command.getSource())));
+        dispatcher.register(Commands.literal("warp").then(Commands.literal("dungeonhub").executes((command) -> warpDungeonhubCommand(command.getSource()))));
     }
 
     private int warpLobbyCommand(CommandSourceStack source) throws CommandSyntaxException {

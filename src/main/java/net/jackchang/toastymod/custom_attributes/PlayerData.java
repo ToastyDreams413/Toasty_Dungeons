@@ -1,6 +1,5 @@
 package net.jackchang.toastymod.custom_attributes;
 
-import net.jackchang.toastymod.Player;
 import net.minecraft.nbt.CompoundTag;
 
 import java.util.UUID;
@@ -24,10 +23,6 @@ public class PlayerData {
     private boolean inParty;
     private UUID partyLeader;
     private UUID[] party;
-
-    //private int shillings, rank, selectedClassIndex, totalClasses, maxClasses, playerXP, playerLevel;
-
-    private PlayerClass[] playerClasses;
 
     public PlayerData() {
         shillings = 0;
@@ -73,8 +68,6 @@ public class PlayerData {
 
     public int getPlayerXP() { return playerXP; }
 
-    public PlayerClass getSelectedClass() { return playerClasses[selectedClassIndex]; }
-
     public void increaseShillings() { shillings++; }
 
     public void increaseShillings(int amount) { shillings += amount; }
@@ -90,17 +83,6 @@ public class PlayerData {
     public void increasePlayerLevel() { playerLevel++; }
 
     public void increasePlayerLevel(int amount) { playerLevel += amount; }
-
-    public boolean hasClass(String className) {
-        for (PlayerClass playerClass : playerClasses) {
-            if (playerClass.getClassName().equals(className)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-
 
     public void copyFrom(PlayerData source) {
         /*

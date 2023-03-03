@@ -12,6 +12,8 @@ import net.minecraft.commands.arguments.EntityArgument;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 
+import java.util.concurrent.atomic.AtomicBoolean;
+
 public class GiftCommand {
 
     public GiftCommand(CommandDispatcher<CommandSourceStack> dispatcher) {
@@ -23,16 +25,40 @@ public class GiftCommand {
 
     private int giveShillings(CommandSourceStack source, ServerPlayer targetPlayer, int shillings) {
         ServerPlayer originalPlayer = source.getPlayer();
+        AtomicBoolean hasEnough = new AtomicBoolean(true);
 
-        // originalPlayer.sendSystemMessage(Component.literal("You are trying to send a shilling...").withStyle(ChatFormatting.AQUA));
+        if (originalPlayer.equals(targetPlayer)) {
+            originalPlayer.getCapability(PlayerDataProvider.PLAYER_DATA).ifPresent(playerData -> {
+                if (playerData.getShillings() < shillings) {
+                    originalPlayer.sendSystemMessage(Component.literal("It's pointless to gift shillings to yourself... and you don't even have that many shillings to gift").withStyle(ChatFormatting.RED));
+                }
+                else {
+                    originalPlayer.sendSystemMessage(Component.literal("It's pointless to gift shillings to yourself...").withStyle(ChatFormatting.RED));
+                }
+            });
+            return 1;
+        }
 
-        // give shillings to player
-        targetPlayer.getCapability(PlayerDataProvider.PLAYER_DATA).ifPresent(playerData -> {
-            playerData.increaseShillings(shillings);
-            originalPlayer.sendSystemMessage(Component.literal("You have sent shillings to " + targetPlayer.getName().getString()).withStyle(ChatFormatting.GOLD));
-            targetPlayer.sendSystemMessage(Component.literal("You gained " + shillings + " shillings from " + originalPlayer.getName().getString()).withStyle(ChatFormatting.GOLD));
-            ModMessages.sendToPlayer(new PlayerDataSyncS2CPacket(playerData), targetPlayer);
+        originalPlayer.getCapability(PlayerDataProvider.PLAYER_DATA).ifPresent(playerData -> {
+            if (playerData.getShillings() < shillings) {
+                originalPlayer.sendSystemMessage(Component.literal("You don't have that many shillings to gift!").withStyle(ChatFormatting.RED));
+                hasEnough.set(false);
+            }
         });
+
+        // give shillings to the target player if the original player has enough
+        if (hasEnough.get()) {
+            originalPlayer.getCapability(PlayerDataProvider.PLAYER_DATA).ifPresent(playerData -> {
+                playerData.increaseShillings(-1 * shillings);
+                originalPlayer.sendSystemMessage(Component.literal("You gave " + shillings + " shillings to " + targetPlayer.getName().getString()).withStyle(ChatFormatting.GOLD));
+                ModMessages.sendToPlayer(new PlayerDataSyncS2CPacket(playerData), originalPlayer);
+            });
+            targetPlayer.getCapability(PlayerDataProvider.PLAYER_DATA).ifPresent(playerData -> {
+                playerData.increaseShillings(shillings);
+                targetPlayer.sendSystemMessage(Component.literal("You received " + shillings + " shillings from " + originalPlayer.getName().getString()).withStyle(ChatFormatting.GOLD));
+                ModMessages.sendToPlayer(new PlayerDataSyncS2CPacket(playerData), targetPlayer);
+            });
+        }
 
         return 1;
     }

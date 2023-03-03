@@ -32,7 +32,6 @@ public class GivePlayerShillingsC2SPacket {
         context.enqueueWork(() -> {
             // on the server
             ServerPlayer player = context.getSender();
-            ServerLevel level = player.getLevel();
 
             player.getCapability(PlayerDataProvider.PLAYER_DATA).ifPresent(playerData -> {
                 playerData.increaseShillings(amount);

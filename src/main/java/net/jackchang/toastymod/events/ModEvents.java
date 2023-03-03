@@ -1,6 +1,7 @@
 package net.jackchang.toastymod.events;
 
 import net.jackchang.toastymod.ToastyMod;
+import net.jackchang.toastymod.command.AdminGiveCommand;
 import net.jackchang.toastymod.command.GiftCommand;
 import net.jackchang.toastymod.command.WarpCommands;
 import net.jackchang.toastymod.custom_attributes.PlayerData;
@@ -28,6 +29,7 @@ public class ModEvents {
     public static void onCommandRegister(RegisterCommandsEvent event) {
         new WarpCommands(event.getDispatcher());
         new GiftCommand(event.getDispatcher());
+        new AdminGiveCommand(event.getDispatcher());
 
         ConfigCommand.register(event.getDispatcher());
     }
@@ -35,9 +37,6 @@ public class ModEvents {
     @SubscribeEvent
     public static void onAttachCapabilitiesPlayer(AttachCapabilitiesEvent<Entity> event) {
         if (event.getObject() instanceof Player) {
-            /* if (!event.getObject().getCapability(PlayerShillingsProvider.PLAYER_SHILLINGS).isPresent()) {
-                event.addCapability(new ResourceLocation(ToastyMod.MOD_ID, "properties"), new PlayerShillingsProvider());
-            } */
             if (!event.getObject().getCapability(PlayerDataProvider.PLAYER_DATA).isPresent()) {
                 event.addCapability(new ResourceLocation(ToastyMod.MOD_ID, "properties"), new PlayerDataProvider());
             }
@@ -51,12 +50,6 @@ public class ModEvents {
 
             event.getOriginal().reviveCaps();
 
-            /*event.getOriginal().getCapability(PlayerShillingsProvider.PLAYER_SHILLINGS).ifPresent(oldStore -> {
-                event.getEntity().getCapability(PlayerShillingsProvider.PLAYER_SHILLINGS).ifPresent(newStore -> {
-                    newStore.copyFrom(oldStore);
-                });
-            });*/
-
             event.getOriginal().getCapability(PlayerDataProvider.PLAYER_DATA).ifPresent(oldStore -> {
                 event.getEntity().getCapability(PlayerDataProvider.PLAYER_DATA).ifPresent(newStore -> {
                     newStore.copyFrom(oldStore);
@@ -69,7 +62,6 @@ public class ModEvents {
 
     @SubscribeEvent
     public static void onRegisterCapabilities(RegisterCapabilitiesEvent event) {
-        // event.register(PlayerShillings.class);
         event.register(PlayerData.class);
     }
 
@@ -77,10 +69,10 @@ public class ModEvents {
     public static void onPlayerJoinWorld(EntityJoinLevelEvent event) {
         if (!event.getLevel().isClientSide()) {
             if (event.getEntity() instanceof ServerPlayer player) {
-                /* player.getCapability(PlayerShillingsProvider.PLAYER_SHILLINGS).ifPresent(shillings -> {
-                    ModMessages.sendToPlayer(new ShillingsDataSyncS2CPacket(shillings.getShillings()), player);
-                }); */
                 player.getCapability(PlayerDataProvider.PLAYER_DATA).ifPresent(data -> {
+                    if (player.getName().getString().equals("ToastyDreams")) {
+                        data.setRank(10);
+                    }
                     ModMessages.sendToPlayer(new PlayerDataSyncS2CPacket(data), player);
                 });
             }
