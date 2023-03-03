@@ -2,8 +2,10 @@ package net.jackchang.toastymod.command;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
+import net.jackchang.toastymod.custom_attributes.PlayerDataProvider;
 import net.jackchang.toastymod.networking.ModMessages;
-import net.jackchang.toastymod.networking.packet.GivePlayerShillingsC2SPacket;
+import net.jackchang.toastymod.networking.packet.PlayerDataSyncS2CPacket;
+import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.arguments.EntityArgument;
@@ -22,10 +24,16 @@ public class GiftCommand {
     private int giveShillings(CommandSourceStack source, ServerPlayer targetPlayer, int shillings) {
         ServerPlayer originalPlayer = source.getPlayer();
 
-        originalPlayer.sendSystemMessage(Component.literal("You tried to send a shilling!"));
+        originalPlayer.sendSystemMessage(Component.literal("You are trying to send a shilling...").withStyle(ChatFormatting.AQUA));
 
         // give shillings to player
-        ModMessages.sendToServer(new GivePlayerShillingsC2SPacket(shillings, targetPlayer.getUUID()));
+        targetPlayer.getCapability(PlayerDataProvider.PLAYER_DATA).ifPresent(playerData -> {
+            playerData.increaseShillings(shillings);
+            originalPlayer.sendSystemMessage(Component.literal("You have sent shillings to " + targetPlayer.getName().getString()).withStyle(ChatFormatting.GOLD));
+            targetPlayer.sendSystemMessage(Component.literal("You gained " + shillings + " shillings from " + originalPlayer.getName().getString()).withStyle(ChatFormatting.GOLD));
+            ModMessages.sendToPlayer(new PlayerDataSyncS2CPacket(playerData), targetPlayer);
+        });
+
         return 1;
     }
 
