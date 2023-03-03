@@ -3,41 +3,57 @@ package net.jackchang.toastymod.custom_attributes;
 import net.jackchang.toastymod.Player;
 import net.minecraft.nbt.CompoundTag;
 
+import java.util.UUID;
+
 public class PlayerData {
 
-    private int shillings, rank, selectedClassIndex, totalClasses, maxClasses, playerXP, playerLevel;
+    private final int NUMBER_OF_KINGDOMS = 3;
+    private final int NUMBER_OF_CLASSES = 3;
+
+    private int shillings;
+    private int gorbs;
+    private int[] reputation;
+    private int rank;
+    private int selectedClassIndex;
+    private int[] unlockedClasses;
+    private int playerXP;
+    private int playerLevel;
+    private int dungeonXP;
+    private int dungeonLevel;
+    private int[] unlockedKingdoms;
+    private boolean inParty;
+    private UUID partyLeader;
+    private UUID[] party;
+
+    //private int shillings, rank, selectedClassIndex, totalClasses, maxClasses, playerXP, playerLevel;
 
     private PlayerClass[] playerClasses;
 
     public PlayerData() {
         shillings = 0;
-        rank = 1;
+        gorbs = 0;
+        reputation = new int[NUMBER_OF_KINGDOMS];
+        reputation[0] = 0;
+        rank = 0;
         selectedClassIndex = 0;
-        totalClasses = 0;
-        maxClasses = 5;
+        unlockedClasses = new int[NUMBER_OF_CLASSES];
         playerXP = 0;
-        playerLevel = 0;
-    }
-
-    public PlayerData(int shillings, int rank, int selectedClassIndex, int totalClasses, int maxClasses, int playerXP, int playerLevel) {
-        this.shillings = shillings;
-        this.rank = rank;
-        this.selectedClassIndex = selectedClassIndex;
-        this.totalClasses = totalClasses;
-        this.maxClasses = maxClasses;
-        this.playerXP = playerXP;
-        this.playerLevel = playerLevel;
+        playerLevel = 1;
+        dungeonXP = 0;
+        dungeonLevel = 1;
+        unlockedKingdoms = new int[NUMBER_OF_KINGDOMS];
+        inParty = false;
+        partyLeader = null;
+        party = null;
     }
 
     public void setShillings(int shillings) { this.shillings = shillings; }
 
+    public void setGorbs(int gorbs) { this.gorbs = gorbs; }
+
     public void setRank(int rank) { this.rank = rank; }
 
     public void setSelectedClassIndex(int selectedClassIndex) { this.selectedClassIndex = selectedClassIndex; }
-
-    public void setTotalClasses(int totalClasses) { this.totalClasses = totalClasses; }
-
-    public void setMaxClasses(int maxClasses) { this.maxClasses = maxClasses; }
 
     public void setPlayerLevel(int playerLevel) { this.playerLevel = playerLevel; }
 
@@ -47,13 +63,11 @@ public class PlayerData {
         return shillings;
     }
 
+    public int getGorbs() { return gorbs; }
+
     public int getRank() { return rank; }
 
     public int getSelectedClassIndex() { return selectedClassIndex; }
-
-    public int getTotalClasses() { return totalClasses; }
-
-    public int getMaxClasses() { return maxClasses; }
 
     public int getPlayerLevel() { return playerLevel; }
 
@@ -68,10 +82,6 @@ public class PlayerData {
     public void increaseRank() { rank++; }
 
     public void increaseRank(int amount) { rank += amount; }
-
-    public void increaseMaxClasses() { maxClasses++; }
-
-    public void increaseMaxClasses(int amount) { maxClasses += amount; }
 
     public void increasePlayerXP() { playerXP++; }
 
@@ -90,36 +100,10 @@ public class PlayerData {
         return false;
     }
 
-    public boolean canCreateClass() {
-        return totalClasses < maxClasses;
-    }
 
-    public void increaseClassArraySize() {
-        PlayerClass[] newClassArray = new PlayerClass[totalClasses];
-        for (int i = 0; i < totalClasses; i++) {
-            newClassArray[i] = playerClasses[i];
-        }
-        playerClasses = new PlayerClass[totalClasses + 1];
-        for (int i = 0; i < totalClasses; i++) {
-            playerClasses[i] = newClassArray[i];
-        }
-    }
-
-    public void createClass(String className) {
-        totalClasses++;
-        increaseClassArraySize();
-        playerClasses[totalClasses - 1] = new PlayerClass(className);
-    }
-
-    public void selectClass(String className) {
-        for (int i = 0; i < totalClasses; i++) {
-            if (playerClasses[i].getClassName().equals(className)) {
-                selectedClassIndex = i;
-            }
-        }
-    }
 
     public void copyFrom(PlayerData source) {
+        /*
         this.shillings = source.shillings;
         this.rank = source.rank;
         this.selectedClassIndex = source.selectedClassIndex;
@@ -131,14 +115,13 @@ public class PlayerData {
         this.maxClasses = source.maxClasses;
         this.playerXP = source.playerXP;
         this.playerLevel = source.playerLevel;
+         */
     }
 
     public void saveNBTData(CompoundTag nbt) {
         nbt.putInt("shillings", shillings);
         nbt.putInt("rank", rank);
         nbt.putInt("selectedClassIndex", selectedClassIndex);
-        nbt.putInt("totalClasses", totalClasses);
-        nbt.putInt("maxClasses", maxClasses);
         nbt.putInt("playerXP", playerXP);
         nbt.putInt("playerLevel", playerLevel);
     }
@@ -147,8 +130,6 @@ public class PlayerData {
         shillings = nbt.getInt("shillings");
         rank = nbt.getInt("rank");
         selectedClassIndex = nbt.getInt("selectedClassIndex");
-        totalClasses = nbt.getInt("totalClasses");
-        maxClasses = nbt.getInt("maxClasses");
         playerXP = nbt.getInt("playerXP");
         playerLevel = nbt.getInt("playerLevel");
     }

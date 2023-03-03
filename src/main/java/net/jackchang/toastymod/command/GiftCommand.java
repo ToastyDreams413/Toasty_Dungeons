@@ -24,7 +24,7 @@ public class GiftCommand {
     private int giveShillings(CommandSourceStack source, ServerPlayer targetPlayer, int shillings) {
         ServerPlayer originalPlayer = source.getPlayer();
 
-        originalPlayer.sendSystemMessage(Component.literal("You are trying to send a shilling...").withStyle(ChatFormatting.AQUA));
+        // originalPlayer.sendSystemMessage(Component.literal("You are trying to send a shilling...").withStyle(ChatFormatting.AQUA));
 
         // give shillings to player
         targetPlayer.getCapability(PlayerDataProvider.PLAYER_DATA).ifPresent(playerData -> {

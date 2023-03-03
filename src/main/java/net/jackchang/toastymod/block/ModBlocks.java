@@ -26,17 +26,17 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> Toasty_Mineral_Block = registerBlock("toasty_mineral_block",
             () -> new Block(BlockBehaviour.Properties.of(Material.STONE)
-                    .strength(6f).requiresCorrectToolForDrops()), ModCreativeModeTab.TOASTY_TAB);
+                    .strength(6f).requiresCorrectToolForDrops()), ModCreativeModeTab.TOASTY_MISCELLANEOUS);
 
     public static final RegistryObject<Block> Toasty_Mineral_Ore = registerBlock("toasty_mineral_ore",
             () -> new DropExperienceBlock(BlockBehaviour.Properties.of(Material.STONE)
                     .strength(6f).requiresCorrectToolForDrops(),
-                    UniformInt.of(3, 7)), ModCreativeModeTab.TOASTY_TAB);
+                    UniformInt.of(3, 7)), ModCreativeModeTab.TOASTY_MISCELLANEOUS);
 
     public static final RegistryObject<Block> Deepslate_Toasty_Mineral_Ore = registerBlock("deepslate_toasty_mineral_ore",
             () -> new DropExperienceBlock(BlockBehaviour.Properties.of(Material.STONE)
                     .strength(6f).requiresCorrectToolForDrops(),
-                    UniformInt.of(3, 7)), ModCreativeModeTab.TOASTY_TAB);
+                    UniformInt.of(3, 7)), ModCreativeModeTab.TOASTY_MISCELLANEOUS);
 
     // registers the block
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block, CreativeModeTab tab) {

@@ -15,17 +15,12 @@ public class PlayerDataSyncS2CPacket {
     }
 
     public PlayerDataSyncS2CPacket(FriendlyByteBuf buf) {
-        playerData = new PlayerData(buf.readInt(), buf.readInt(), buf.readInt(), buf.readInt(), buf.readInt(), buf.readInt(), buf.readInt());
+        playerData = new PlayerData();
+        playerData.setShillings(buf.readInt());
     }
 
     public void toBytes(FriendlyByteBuf buf) {
         buf.writeInt(playerData.getShillings());
-        buf.writeInt(playerData.getRank());
-        buf.writeInt(playerData.getSelectedClassIndex());
-        buf.writeInt(playerData.getTotalClasses());
-        buf.writeInt(playerData.getMaxClasses());
-        buf.writeInt(playerData.getPlayerXP());
-        buf.writeInt(playerData.getPlayerLevel());
     }
 
     public boolean handle(Supplier<NetworkEvent.Context> supplier) {

@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "toastymod:item/helmet_of_dread"
+  }
+}

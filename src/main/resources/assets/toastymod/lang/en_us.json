@@ -8,19 +8,47 @@
 
   "item.toastymod.menu" : "Menu",
 
-  "item.toastymod.starter_sword" : "Starter Sword",
+  "item.toastymod.arachnas_fang" : "Arachna's Fang",
+  "item.toastymod.cracked_stone_hammer" : "Cracked Stone Hammer",
+  "item.toastymod.crystal_javelin" : "Crystal Javelin",
+  "item.toastymod.cutlass_of_the_seas" : "Cutlass of the Seas",
   "item.toastymod.decaying_drumstick" : "Decaying Drumstick",
   "item.toastymod.flimsy_rapier" : "Flimsy Rapier",
-  "item.toastymod.crystal_javelin" : "Crystal Javelin",
+  "item.toastymod.rusty_sword" : "Rusty Sword",
+  "item.toastymod.starter_sword" : "Starter Sword",
+  "item.toastymod.sword_of_electrifying_power" : "Sword of Electrifying Power",
 
   "item.toastymod.starter_bow" : "Starter Bow",
 
-  "item.toastymod.starter_helmet" : "Starter Helmet",
-  "item.toastymod.starter_chestplate" : "Starter Chestplate",
-  "item.toastymod.starter_chausses" : "Starter Chausses",
-  "item.toastymod.starter_sabaton" : "Starter Sabaton",
+  "item.toastymod.honey_wand" : "Honey Wand",
+  "item.toastymod.wand_of_despair" : "Wand of Despair",
 
-  "itemGroup.toastytab": "Toasty Mod Tab",
+  "item.toastymod.helmet_of_dread" : "Helmet of Dread",
+  "item.toastymod.starter_helmet" : "Starter Helmet",
+
+  "item.toastymod.chestplate_of_dread" : "Chestplate of Dread",
+  "item.toastymod.starter_chestplate" : "Starter Chestplate",
+
+  "item.toastymod.chausses_of_dread" : "Chausses of Dread",
+  "item.toastymod.starter_chausses" : "Starter Chausses",
+
+  "item.toastymod.starter_sabaton" : "Starter Sabaton",
+  "item.toastymod.sabaton_of_dread" : "Sabaton of Dread",
+
+  "item.toastymod.slithering_spell" : "Slithering Spell",
+  "item.toastymod.starter_spell" : "Starter Spell",
+  "item.toastymod.zeus_lightning_bolt" : "Zeus' Lightning Bolt",
+
+  "item.toastymod.honey_tome" : "Honey Tome",
+  "item.toastymod.starter_tome" : "Starter Tome",
+  "item.toastymod.tome_of_darkness" : "Tome of Darkness",
+
+  "item.toastymod.starter_horn" : "Starter Horn",
+
+  "itemGroup.toastymiscellaneous": "Toasty Mod Miscellaneous",
+  "itemGroup.toastyarmor": "Toasty Mod Armors",
+  "itemGroup.toastyweapons": "Toasty Mod Weapons",
+  "itemGroup.toastyabilities": "Toasty Mod Abilities",
 
   "key.category.toastymod.toasty" : "Toasty Mod",
   "key.toastymod.spawn_cow" : "Summon Cow",
