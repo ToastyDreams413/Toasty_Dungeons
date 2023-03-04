@@ -84,29 +84,29 @@ public class ModItems {
 
     // armors
     public static final RegistryObject<ArmorItem> STARTER_HELMET = ITEMS.register("starter_helmet",
-            () -> new CustomHelmet(ModArmorMaterials.STARTER_HEAVY, new Item.Properties().tab(ModCreativeModeTab.TOASTY_ARMORS),
+            () -> new CustomHelmet("starter_helmet", ModArmorMaterials.STARTER_HEAVY, new Item.Properties().tab(ModCreativeModeTab.TOASTY_ARMORS),
                     "A very basic standard helmet."));
     public static final RegistryObject<ArmorItem> STARTER_CHESTPLATE = ITEMS.register("starter_chestplate",
-            () -> new CustomChestplate(ModArmorMaterials.STARTER_HEAVY, new Item.Properties().tab(ModCreativeModeTab.TOASTY_ARMORS),
+            () -> new CustomChestplate("starter_chestplate", ModArmorMaterials.STARTER_HEAVY, new Item.Properties().tab(ModCreativeModeTab.TOASTY_ARMORS),
                     "A very basic standard chestplate."));
     public static final RegistryObject<ArmorItem> STARTER_CHAUSSES = ITEMS.register("starter_chausses",
-            () -> new CustomChausses(ModArmorMaterials.STARTER_HEAVY, new Item.Properties().tab(ModCreativeModeTab.TOASTY_ARMORS),
+            () -> new CustomChausses("starter_chausses", ModArmorMaterials.STARTER_HEAVY, new Item.Properties().tab(ModCreativeModeTab.TOASTY_ARMORS),
                     "A very basic standard chausses."));
     public static final RegistryObject<ArmorItem> STARTER_SABATON = ITEMS.register("starter_sabaton",
-            () -> new CustomSabaton(ModArmorMaterials.STARTER_HEAVY, new Item.Properties().tab(ModCreativeModeTab.TOASTY_ARMORS),
+            () -> new CustomSabaton("starter_sabaton", ModArmorMaterials.STARTER_HEAVY, new Item.Properties().tab(ModCreativeModeTab.TOASTY_ARMORS),
                     "A very basic standard sabaton."));
 
     public static final RegistryObject<ArmorItem> HELMET_OF_DREAD = ITEMS.register("helmet_of_dread",
-            () -> new CustomHelmet(ModArmorMaterials.DREAD_SET, new Item.Properties().tab(ModCreativeModeTab.TOASTY_ARMORS),
+            () -> new CustomHelmet("helmet_of_dread", ModArmorMaterials.DREAD_SET, new Item.Properties().tab(ModCreativeModeTab.TOASTY_ARMORS),
                     "Helmet of pure dread. Powerful, but possesses a dark force."));
     public static final RegistryObject<ArmorItem> CHESTPLATE_OF_DREAD = ITEMS.register("chestplate_of_dread",
-            () -> new CustomChestplate(ModArmorMaterials.DREAD_SET, new Item.Properties().tab(ModCreativeModeTab.TOASTY_ARMORS),
+            () -> new CustomChestplate("chestplate_of_dread", ModArmorMaterials.DREAD_SET, new Item.Properties().tab(ModCreativeModeTab.TOASTY_ARMORS),
                     "Chestplate of pure dread. Powerful, but possesses a dark force."));
     public static final RegistryObject<ArmorItem> CHAUSSES_OF_DREAD = ITEMS.register("chausses_of_dread",
-            () -> new CustomChausses(ModArmorMaterials.DREAD_SET, new Item.Properties().tab(ModCreativeModeTab.TOASTY_ARMORS),
+            () -> new CustomChausses("chausses_of_dread", ModArmorMaterials.DREAD_SET, new Item.Properties().tab(ModCreativeModeTab.TOASTY_ARMORS),
                     "Chausses of pure dread. Powerful, but possesses a dark force."));
     public static final RegistryObject<ArmorItem> SABATON_OF_DREAD = ITEMS.register("sabaton_of_dread",
-            () -> new CustomSabaton(ModArmorMaterials.DREAD_SET, new Item.Properties().tab(ModCreativeModeTab.TOASTY_ARMORS),
+            () -> new CustomSabaton("sabaton_of_dread", ModArmorMaterials.DREAD_SET, new Item.Properties().tab(ModCreativeModeTab.TOASTY_ARMORS),
                     "Sabaton of pure dread. Powerful, but possesses a dark force."));
 
     // spells

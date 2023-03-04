@@ -1,6 +1,7 @@
 package net.jackchang.toastymod.item.custom;
 
 import net.jackchang.toastymod.ToastyMod;
+import net.jackchang.toastymod.data.ArmorData;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.LazyLoadedValue;
@@ -13,9 +14,11 @@ import java.util.function.Supplier;
 
 public enum ModArmorMaterials implements ArmorMaterial {
 
-    STARTER_HEAVY("starter_heavy", 5, new int[]{1, 2, 3, 1}, 15, SoundEvents.ARMOR_EQUIP_IRON, 0.0F, 0.0F, () -> Ingredient.EMPTY),
+    STARTER_HEAVY("starter_heavy", 5, new int[]{ArmorData.ARMOR_DEFENSE.get("starter_sabaton"), ArmorData.ARMOR_DEFENSE.get("starter_chausses"), ArmorData.ARMOR_DEFENSE.get("starter_chestplate"), ArmorData.ARMOR_DEFENSE.get("starter_helmet")},
+            15, SoundEvents.ARMOR_EQUIP_IRON, 0.0F, 0.0F, () -> Ingredient.EMPTY),
 
-    DREAD_SET("dread_set", 5, new int[]{14, 18, 20, 15}, 15, SoundEvents.ARMOR_EQUIP_NETHERITE, 0.0F, 0.0F, () -> Ingredient.EMPTY);
+    DREAD_SET("dread_set", 5, new int[]{ArmorData.ARMOR_DEFENSE.get("sabaton_of_dread"), ArmorData.ARMOR_DEFENSE.get("chausses_of_dread"), ArmorData.ARMOR_DEFENSE.get("chestplate_of_dread"), ArmorData.ARMOR_DEFENSE.get("helmet_of_dread")},
+            15, SoundEvents.ARMOR_EQUIP_NETHERITE, 0.0F, 0.0F, () -> Ingredient.EMPTY);
 
     private static final int[] HEALTH_PER_SLOT = new int[]{13, 15, 16, 11};
     private final String name;

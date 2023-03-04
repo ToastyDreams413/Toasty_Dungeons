@@ -6,6 +6,7 @@ import net.jackchang.toastymod.command.GiftCommand;
 import net.jackchang.toastymod.command.WarpCommands;
 import net.jackchang.toastymod.custom_attributes.PlayerData;
 import net.jackchang.toastymod.custom_attributes.PlayerDataProvider;
+import net.jackchang.toastymod.data.ArmorData;
 import net.jackchang.toastymod.data.SwordData;
 import net.jackchang.toastymod.item.custom.CustomSword;
 import net.jackchang.toastymod.networking.ModMessages;
@@ -104,9 +105,18 @@ public class ModEvents {
         if (event.getEntity() instanceof ServerPlayer player) {
             Entity target = event.getTarget();
             Item usedItem = player.getMainHandItem().getItem();
-            if (usedItem instanceof CustomSword) {
-                target.hurt(DamageSource.playerAttack(player), SwordData.SWORD_DAMAGE.get(usedItem.toString()) * player.getAttackStrengthScale(0));
+            int damageCalc = 0;
+            for (ItemStack armorPiece : player.getArmorSlots()) {
+                String curArmor = armorPiece.toString().substring(2);
+                damageCalc += ArmorData.ARMOR_ATTACK.get(curArmor);
             }
+            if (usedItem instanceof CustomSword) {
+                damageCalc += SwordData.SWORD_DAMAGE.get(usedItem.toString());
+            }
+            player.sendSystemMessage(Component.literal("Your max damage: " + damageCalc));
+            damageCalc *= player.getAttackStrengthScale(0);
+            player.sendSystemMessage(Component.literal("Your real damage based on charging time: " + damageCalc));
+            target.hurt(DamageSource.playerAttack(player), damageCalc);
         }
     }
 }
