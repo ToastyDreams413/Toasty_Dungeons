@@ -29,39 +29,39 @@ public class ModItems {
     // swords
 
     public static final RegistryObject<SwordItem> STARTER_SWORD = ITEMS.register("starter_sword",
-            () -> new CustomSword(Tiers.STARTER, -3, -3f, new Item.Properties().tab(ModCreativeModeTab.TOASTY_WEAPONS),
+            () -> new CustomSword("starter_sword", Tiers.STARTER, new Item.Properties().tab(ModCreativeModeTab.TOASTY_WEAPONS),
                     "A starter sword. Honestly, it's pretty garbage."));
 
     public static final RegistryObject<SwordItem> DECAYING_DRUMSTICK = ITEMS.register("decaying_drumstick",
-            () -> new CustomSword(Tiers.STARTER, -2, -3, new Item.Properties().tab(ModCreativeModeTab.TOASTY_WEAPONS),
+            () -> new CustomSword("decaying_drumstick", Tiers.STARTER, new Item.Properties().tab(ModCreativeModeTab.TOASTY_WEAPONS),
                     "A decaying drumstick that you obtained by defeating the Mother Hen. Pretty disgusting."));
 
     public static final RegistryObject<SwordItem> RUSTY_SWORD = ITEMS.register("rusty_sword",
-            () -> new CustomSword(Tiers.STARTER, -1, -3, new Item.Properties().tab(ModCreativeModeTab.TOASTY_WEAPONS),
+            () -> new CustomSword("rusty_sword", Tiers.STARTER,  new Item.Properties().tab(ModCreativeModeTab.TOASTY_WEAPONS),
                     "Once quite a potent sword. However, it's very rusty now."));
 
     public static final RegistryObject<SwordItem> ARACHNAS_FANG = ITEMS.register("arachnas_fang",
-            () -> new CustomSword(Tiers.STARTER, -1, -2, new Item.Properties().tab(ModCreativeModeTab.TOASTY_WEAPONS),
+            () -> new CustomSword("arachnas_fang", Tiers.STARTER, new Item.Properties().tab(ModCreativeModeTab.TOASTY_WEAPONS),
                     "A trophy from defeating Arachna. It's quite sharp."));
 
     public static final RegistryObject<SwordItem> FLIMSY_RAPIER = ITEMS.register("flimsy_rapier",
-            () -> new CustomSword(Tiers.STARTER, 0, -1, new Item.Properties().tab(ModCreativeModeTab.TOASTY_WEAPONS),
+            () -> new CustomSword("flimsy_rapier", Tiers.STARTER, new Item.Properties().tab(ModCreativeModeTab.TOASTY_WEAPONS),
                     "A flimsy rapier."));
 
     public static final RegistryObject<SwordItem> CRACKED_STONE_HAMMER = ITEMS.register("cracked_stone_hammer",
-            () -> new CustomSword(Tiers.STARTER, 6, -3.5f, new Item.Properties().tab(ModCreativeModeTab.TOASTY_WEAPONS),
-                    "Legend says this was once one of the most powerful weapons in existence. Unfortunately, most of it was loss when it was cracked."));
+            () -> new CustomSword("cracked_stone_hammer", Tiers.STARTER, new Item.Properties().tab(ModCreativeModeTab.TOASTY_WEAPONS),
+                    "Once one of the most powerful weapons in existence. Unfortunately, most of it was loss when it was cracked."));
 
     public static final RegistryObject<SwordItem> CUTLASS_OF_THE_SEAS = ITEMS.register("cutlass_of_the_seas",
-            () -> new CustomSword(Tiers.STARTER, 1, 1, new Item.Properties().tab(ModCreativeModeTab.TOASTY_WEAPONS),
+            () -> new CustomSword("cutlass_of_the_seas", Tiers.STARTER, new Item.Properties().tab(ModCreativeModeTab.TOASTY_WEAPONS),
                     "This mighty sword was once brandished by Captain Blackbeard himself."));
 
     public static final RegistryObject<SwordItem> CRYSTAL_JAVELIN = ITEMS.register("crystal_javelin",
-            () -> new CustomSword(Tiers.STARTER, 5, 0, new Item.Properties().tab(ModCreativeModeTab.TOASTY_WEAPONS),
+            () -> new CustomSword("crystal_javelin", Tiers.STARTER, new Item.Properties().tab(ModCreativeModeTab.TOASTY_WEAPONS),
                     "A javelin that can be thrown pretty far, and was once the main weapon of the Crystal Assassin."));
 
     public static final RegistryObject<SwordItem> SWORD_OF_ELECTRIFYING_POWER = ITEMS.register("sword_of_electrifying_power",
-            () -> new CustomSword(Tiers.STARTER, 8, 3.5f, new Item.Properties().tab(ModCreativeModeTab.TOASTY_WEAPONS),
+            () -> new CustomSword("sword_of_electrifying_power", Tiers.STARTER, new Item.Properties().tab(ModCreativeModeTab.TOASTY_WEAPONS),
                     "This dominant sword once was wielded by Zeus himself. Legend says one strike can defeat almost anything."));
 
 
@@ -73,11 +73,11 @@ public class ModItems {
     // wands
 
     public static final RegistryObject<Item> HONEY_WAND = ITEMS.register("honey_wand",
-            () -> new CustomWand(new Item.Properties().tab(ModCreativeModeTab.TOASTY_ABILITIES),
+            () -> new CustomWand(new Item.Properties().tab(ModCreativeModeTab.TOASTY_WEAPONS),
                     "A wand made of honey. Suprisingly, it's somewhat effective."));
 
     public static final RegistryObject<Item> WAND_OF_DESPAIR = ITEMS.register("wand_of_despair",
-            () -> new CustomWand(new Item.Properties().tab(ModCreativeModeTab.TOASTY_ABILITIES),
+            () -> new CustomWand(new Item.Properties().tab(ModCreativeModeTab.TOASTY_WEAPONS),
                     "Just holding this wand makes you want to crawl back into bed under your covers."));
 
 
@@ -137,20 +137,20 @@ public class ModItems {
     // tomes
 
     public static final RegistryObject<Item> STARTER_TOME = ITEMS.register("starter_tome",
-            () -> new CustomHorn(new Item.Properties().tab(ModCreativeModeTab.TOASTY_ABILITIES),
+            () -> new CustomTome(new Item.Properties().tab(ModCreativeModeTab.TOASTY_ABILITIES),
                     "Doesn't heal much, but it helps."));
 
     public static final RegistryObject<Item> HONEY_TOME = ITEMS.register("honey_tome",
-            () -> new CustomHorn(new Item.Properties().tab(ModCreativeModeTab.TOASTY_ABILITIES),
+            () -> new CustomTome(new Item.Properties().tab(ModCreativeModeTab.TOASTY_ABILITIES),
                     "They say honey can help you heal."));
 
     public static final RegistryObject<Item> TOME_OF_DARKNESS = ITEMS.register("tome_of_darkness",
-            () -> new CustomHorn(new Item.Properties().tab(ModCreativeModeTab.TOASTY_ABILITIES),
+            () -> new CustomTome(new Item.Properties().tab(ModCreativeModeTab.TOASTY_ABILITIES),
                     "A tome salvaged from the remains of The Despairing Dark. Unlike others, it doesn't heal much, but somehow does quite a bit of damage."));
 
 
     public static class Tiers {
-        public static final Tier STARTER = new ForgeTier(2, 800, 1.5f, 3, 350, null,
+        public static final Tier STARTER = new ForgeTier(2, 800, 0f, -1, 350, null,
                 () -> Ingredient.EMPTY);
     }
 

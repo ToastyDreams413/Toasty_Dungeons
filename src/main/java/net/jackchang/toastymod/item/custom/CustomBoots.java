@@ -25,12 +25,8 @@ public class CustomBoots extends ArmorItem {
     @Override
     public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> components, TooltipFlag flag) {
 
-        if (Screen.hasShiftDown()) {
-            components.add(Component.literal(this.description).withStyle(ChatFormatting.AQUA));
-        }
-        else {
-            components.add(Component.literal("Press SHIFT for more info").withStyle(ChatFormatting.YELLOW));
-        }
+        stack.hideTooltipPart(ItemStack.TooltipPart.MODIFIERS);
+        components.add(Component.literal(this.description).withStyle(ChatFormatting.AQUA));
 
         super.appendHoverText(stack, level, components, flag);
     }

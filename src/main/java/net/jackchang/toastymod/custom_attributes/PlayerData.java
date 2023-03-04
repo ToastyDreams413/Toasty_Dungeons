@@ -24,6 +24,10 @@ public class PlayerData {
     private UUID partyLeader;
     private UUID[] party;
 
+    // attack, defense, health, mana, speed, evasion, luck of the soul
+    private int atk, def, hp, mp, spd, eva, luckOfTheSoul;
+    private int meleeDmgBuff, magicDmgBuff;
+
     public PlayerData() {
         shillings = 0;
         gorbs = 0;
@@ -71,6 +75,8 @@ public class PlayerData {
     public void increaseShillings() { shillings++; }
 
     public void increaseShillings(int amount) { shillings += amount; }
+
+    public void increaseGorbs(int amount) { gorbs += amount; }
 
     public void increaseRank() { rank++; }
 

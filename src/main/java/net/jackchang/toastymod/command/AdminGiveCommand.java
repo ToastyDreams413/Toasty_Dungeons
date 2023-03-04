@@ -19,6 +19,8 @@ public class AdminGiveCommand {
     public AdminGiveCommand(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(Commands.literal("admin").then(Commands.literal("give").then(Commands.argument("target", EntityArgument.player())
                 .then(Commands.literal("shillings").then(Commands.argument("amount", IntegerArgumentType.integer(1)).executes((command) -> adminGiveShillings(command.getSource(), EntityArgument.getPlayer(command, "target"), IntegerArgumentType.getInteger(command, "amount"))))))));
+        dispatcher.register(Commands.literal("admin").then(Commands.literal("give").then(Commands.argument("target", EntityArgument.player())
+                .then(Commands.literal("gorbs").then(Commands.argument("amount", IntegerArgumentType.integer(1)).executes((command) -> adminGiveGorbs(command.getSource(), EntityArgument.getPlayer(command, "target"), IntegerArgumentType.getInteger(command, "amount"))))))));
     }
 
     private int adminGiveShillings(CommandSourceStack source, ServerPlayer targetPlayer, int shillings) {
@@ -43,6 +45,34 @@ public class AdminGiveCommand {
             } else {
                 originalPlayer.sendSystemMessage(Component.literal("[ADMIN COMMAND] You gave " + shillings + " shillings to " + targetPlayer.getName().getString()).withStyle(ChatFormatting.DARK_RED));
                 targetPlayer.sendSystemMessage(Component.literal("[ADMIN COMMAND] " + originalPlayer.getName().getString() + " gave you " + shillings + " shillings").withStyle(ChatFormatting.DARK_RED));
+            }
+        }
+
+        return 1;
+    }
+
+    private int adminGiveGorbs(CommandSourceStack source, ServerPlayer targetPlayer, int gorbs) {
+        ServerPlayer originalPlayer = source.getPlayer();
+        AtomicBoolean hasPerms = new AtomicBoolean(true);
+
+        originalPlayer.getCapability(PlayerDataProvider.PLAYER_DATA).ifPresent(playerData -> {
+            if (playerData.getRank() < 10) {
+                originalPlayer.sendSystemMessage(Component.literal("You don't have permission to run admin commands!").withStyle(ChatFormatting.RED));
+                hasPerms.set(false);
+            }
+        });
+
+        // give gorbs to player
+        if (hasPerms.get()) {
+            targetPlayer.getCapability(PlayerDataProvider.PLAYER_DATA).ifPresent(playerData -> {
+                playerData.increaseGorbs(gorbs);
+                ModMessages.sendToPlayer(new PlayerDataSyncS2CPacket(playerData), targetPlayer);
+            });
+            if (originalPlayer.equals(targetPlayer)) {
+                originalPlayer.sendSystemMessage(Component.literal("[ADMIN COMMAND] You gave " + gorbs + " gorbs to yourself").withStyle(ChatFormatting.DARK_RED));
+            } else {
+                originalPlayer.sendSystemMessage(Component.literal("[ADMIN COMMAND] You gave " + gorbs + " gorbs to " + targetPlayer.getName().getString()).withStyle(ChatFormatting.DARK_RED));
+                targetPlayer.sendSystemMessage(Component.literal("[ADMIN COMMAND] " + originalPlayer.getName().getString() + " gave you " + gorbs + " gorbs").withStyle(ChatFormatting.DARK_RED));
             }
         }
 

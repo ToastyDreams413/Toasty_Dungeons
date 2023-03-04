@@ -26,7 +26,7 @@ public class CustomWand extends Item {
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         if (!level.isClientSide() && hand == InteractionHand.MAIN_HAND) {
-            player.sendSystemMessage(Component.literal("You tried to use the Wand! (it does nothing right now").withStyle(ChatFormatting.LIGHT_PURPLE));
+            player.sendSystemMessage(Component.literal("You tried to use the Wand! (it does nothing right now)").withStyle(ChatFormatting.LIGHT_PURPLE));
             player.getCooldowns().addCooldown(this, 5);
         }
 
@@ -36,12 +36,7 @@ public class CustomWand extends Item {
     @Override
     public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> components, TooltipFlag flag) {
 
-        if (Screen.hasShiftDown()) {
-            components.add(Component.literal(this.description).withStyle(ChatFormatting.AQUA));
-        }
-        else {
-            components.add(Component.literal("Press SHIFT for more info").withStyle(ChatFormatting.YELLOW));
-        }
+        components.add(Component.literal(this.description).withStyle(ChatFormatting.AQUA));
 
         super.appendHoverText(stack, level, components, flag);
     }
