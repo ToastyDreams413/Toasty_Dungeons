@@ -44,6 +44,14 @@ public class PlayerData {
         inParty = false;
         partyLeader = null;
         party = null;
+
+        atk = 0;
+        def = 0;
+        hp = 0;
+        mp = 0;
+        spd = 0;
+        eva  = 0;
+        luckOfTheSoul = 0;
     }
 
     public void setShillings(int shillings) { this.shillings = shillings; }
@@ -71,6 +79,10 @@ public class PlayerData {
     public int getPlayerLevel() { return playerLevel; }
 
     public int getPlayerXP() { return playerXP; }
+
+    public int getAtk() { return atk; }
+
+    public int getDef() { return def; }
 
     public void increaseShillings() { shillings++; }
 

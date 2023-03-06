@@ -30,6 +30,8 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.server.command.ConfigCommand;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 @Mod.EventBusSubscriber(modid = ToastyMod.MOD_ID)
 public class ModEvents {
 
@@ -106,6 +108,11 @@ public class ModEvents {
             Entity target = event.getTarget();
             Item usedItem = player.getMainHandItem().getItem();
             int damageCalc = 0;
+            AtomicInteger insideAtk = new AtomicInteger();
+            player.getCapability(PlayerDataProvider.PLAYER_DATA).ifPresent(data -> {
+                insideAtk.set(data.getAtk());
+            });
+            damageCalc += insideAtk.get();
             for (ItemStack armorPiece : player.getArmorSlots()) {
                 String curArmor = armorPiece.toString().substring(2);
                 damageCalc += ArmorData.ARMOR_ATTACK.get(curArmor);

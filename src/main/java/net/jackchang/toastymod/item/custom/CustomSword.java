@@ -31,10 +31,10 @@ public class CustomSword extends SwordItem {
     public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> components, TooltipFlag flag) {
 
         stack.hideTooltipPart(ItemStack.TooltipPart.MODIFIERS);
-        components.add(Component.literal(""));
+        components.add(Component.literal(" "));
 
         components.add(Component.literal(this.description).withStyle(ChatFormatting.AQUA));
-        components.add(Component.literal(""));
+        components.add(Component.literal(" "));
         components.add(Component.literal("Damage: " + SwordData.SWORD_DAMAGE.get(name)).withStyle(ChatFormatting.LIGHT_PURPLE));
         components.add(Component.literal("Full Charge Time: " + SwordData.SWORD_COOLDOWN.get(name) + " seconds").withStyle(ChatFormatting.LIGHT_PURPLE));
 

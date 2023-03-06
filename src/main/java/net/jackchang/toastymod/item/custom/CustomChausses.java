@@ -32,9 +32,9 @@ public class CustomChausses extends ArmorItem {
     public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> components, TooltipFlag flag) {
 
         stack.hideTooltipPart(ItemStack.TooltipPart.MODIFIERS);
-        components.add(Component.literal(""));
+        components.add(Component.literal(" "));
         components.add(Component.literal(this.description).withStyle(ChatFormatting.AQUA));
-        components.add(Component.literal(""));
+        components.add(Component.literal(" "));
         // components.add(Component.literal("On Equip:"));
         components.add(Component.literal("+" + this.def + " Defense").withStyle(ChatFormatting.LIGHT_PURPLE));
         if (this.atk != 0) {

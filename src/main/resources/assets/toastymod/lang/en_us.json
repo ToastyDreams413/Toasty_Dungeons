@@ -7,6 +7,10 @@
   "block.toastymod.deepslate_toasty_mineral_ore" : "Deepslate Toasty Mineral Ore",
 
   "item.toastymod.menu" : "Menu",
+  "item.toastymod.small_backpack" : "Small Backpack",
+  "item.toastymod.medium_backpack" : "Medium Backpack",
+  "item.toastymod.large_backpack" : "Large Backpack",
+  "item.toastymod.stat_checker" : "Stat Checker",
 
   "item.toastymod.arachnas_fang" : "Arachna's Fang",
   "item.toastymod.cracked_stone_hammer" : "Cracked Stone Hammer",

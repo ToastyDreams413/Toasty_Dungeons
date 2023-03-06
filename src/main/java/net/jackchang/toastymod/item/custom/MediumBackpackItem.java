@@ -1,8 +1,8 @@
 package net.jackchang.toastymod.item.custom;
 
-import net.jackchang.toastymod.gui.backpack.small_backpack.SmallBackpackData;
-import net.jackchang.toastymod.gui.backpack.small_backpack.SmallBackpackManager;
-import net.jackchang.toastymod.gui.menu.MenuContainer;
+import net.jackchang.toastymod.gui.backpack.medium_backpack.MediumBackpackContainer;
+import net.jackchang.toastymod.gui.backpack.medium_backpack.MediumBackpackData;
+import net.jackchang.toastymod.gui.backpack.medium_backpack.MediumBackpackManager;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
@@ -18,9 +18,9 @@ import net.minecraftforge.network.NetworkHooks;
 
 import java.util.UUID;
 
-public class MenuItem extends Item {
+public class MediumBackpackItem extends Item {
 
-    public MenuItem(Properties properties) {
+    public MediumBackpackItem(Properties properties) {
         super(properties);
     }
 
@@ -36,7 +36,7 @@ public class MenuItem extends Item {
         return stackHandler;
     }
 
-    public static SmallBackpackData getData(ItemStack stack) {
+    public static MediumBackpackData getData(ItemStack stack) {
         UUID uuid;
         CompoundTag tag = stack.getOrCreateTag();
         if (!tag.contains("UUID")) {
@@ -44,7 +44,7 @@ public class MenuItem extends Item {
             tag.putUUID("UUID", uuid);
         } else
             uuid = tag.getUUID("UUID");
-        return SmallBackpackManager.get().getOrCreateBackpack(uuid);
+        return MediumBackpackManager.get().getOrCreateBackpack(uuid);
     }
 
 
@@ -52,10 +52,10 @@ public class MenuItem extends Item {
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         if (!level.isClientSide() && hand == InteractionHand.MAIN_HAND) {
-            ItemStack menu = player.getItemInHand(hand);
-            SmallBackpackData data = MenuItem.getData(menu);
+            ItemStack backpack = player.getItemInHand(hand);
+            MediumBackpackData data = MediumBackpackItem.getData(backpack);
             NetworkHooks.openScreen(((ServerPlayer) player), new SimpleMenuProvider( (windowId, playerInventory, playerEntity) ->
-                    new MenuContainer(windowId, playerInventory, data.getHandler()), menu.getHoverName()));
+                    new MediumBackpackContainer(windowId, playerInventory, data.getHandler()), backpack.getHoverName()));
         }
 
         return super.use(level, player, hand);

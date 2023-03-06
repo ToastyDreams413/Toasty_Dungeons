@@ -41,7 +41,7 @@ public class AdminGiveCommand {
                 ModMessages.sendToPlayer(new PlayerDataSyncS2CPacket(playerData), targetPlayer);
             });
             if (originalPlayer.equals(targetPlayer)) {
-                originalPlayer.sendSystemMessage(Component.literal("[ADMIN COMMAND] You gave " + shillings + " shillings to yourself").withStyle(ChatFormatting.DARK_RED));
+                originalPlayer.sendSystemMessage(Component.literal("[ADMIN COMMAND] You gave yourself " + shillings + " shillings").withStyle(ChatFormatting.DARK_RED));
             } else {
                 originalPlayer.sendSystemMessage(Component.literal("[ADMIN COMMAND] You gave " + shillings + " shillings to " + targetPlayer.getName().getString()).withStyle(ChatFormatting.DARK_RED));
                 targetPlayer.sendSystemMessage(Component.literal("[ADMIN COMMAND] " + originalPlayer.getName().getString() + " gave you " + shillings + " shillings").withStyle(ChatFormatting.DARK_RED));

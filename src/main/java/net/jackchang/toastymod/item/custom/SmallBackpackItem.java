@@ -2,7 +2,7 @@ package net.jackchang.toastymod.item.custom;
 
 import net.jackchang.toastymod.gui.backpack.small_backpack.SmallBackpackData;
 import net.jackchang.toastymod.gui.backpack.small_backpack.SmallBackpackManager;
-import net.jackchang.toastymod.gui.menu.MenuContainer;
+import net.jackchang.toastymod.gui.backpack.small_backpack.SmallBackpackContainer;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
@@ -18,9 +18,9 @@ import net.minecraftforge.network.NetworkHooks;
 
 import java.util.UUID;
 
-public class MenuItem extends Item {
+public class SmallBackpackItem extends Item {
 
-    public MenuItem(Properties properties) {
+    public SmallBackpackItem(Properties properties) {
         super(properties);
     }
 
@@ -52,10 +52,10 @@ public class MenuItem extends Item {
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         if (!level.isClientSide() && hand == InteractionHand.MAIN_HAND) {
-            ItemStack menu = player.getItemInHand(hand);
-            SmallBackpackData data = MenuItem.getData(menu);
+            ItemStack backpack = player.getItemInHand(hand);
+            SmallBackpackData data = SmallBackpackItem.getData(backpack);
             NetworkHooks.openScreen(((ServerPlayer) player), new SimpleMenuProvider( (windowId, playerInventory, playerEntity) ->
-                    new MenuContainer(windowId, playerInventory, data.getHandler()), menu.getHoverName()));
+                    new SmallBackpackContainer(windowId, playerInventory, data.getHandler()), backpack.getHoverName()));
         }
 
         return super.use(level, player, hand);

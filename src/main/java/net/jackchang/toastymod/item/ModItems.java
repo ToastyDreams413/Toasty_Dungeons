@@ -25,6 +25,17 @@ public class ModItems {
     public static final RegistryObject<Item> MENU = ITEMS.register("menu",
             () -> new MenuItem(new Item.Properties().tab(ModCreativeModeTab.TOASTY_MISCELLANEOUS).stacksTo(1)));
 
+    public static final RegistryObject<Item> SMALL_BACKPACK = ITEMS.register("small_backpack",
+            () -> new SmallBackpackItem(new Item.Properties().tab(ModCreativeModeTab.TOASTY_MISCELLANEOUS).stacksTo(1)));
+
+    public static final RegistryObject<Item> MEDIUM_BACKPACK = ITEMS.register("medium_backpack",
+            () -> new MediumBackpackItem(new Item.Properties().tab(ModCreativeModeTab.TOASTY_MISCELLANEOUS).stacksTo(1)));
+
+    public static final RegistryObject<Item> LARGE_BACKPACK = ITEMS.register("large_backpack",
+            () -> new LargeBackpackItem(new Item.Properties().tab(ModCreativeModeTab.TOASTY_MISCELLANEOUS).stacksTo(1)));
+
+    public static final RegistryObject<Item> STAT_CHECKER = ITEMS.register("stat_checker",
+            () -> new StatCheckerItem(new Item.Properties().tab(ModCreativeModeTab.TOASTY_MISCELLANEOUS).stacksTo(1)));
 
     // swords
 
@@ -68,16 +79,16 @@ public class ModItems {
     // bows
 
     public static final RegistryObject<BowItem> STARTER_BOW = ITEMS.register("starter_bow",
-            () -> new CustomBow(new Item.Properties().tab(ModCreativeModeTab.TOASTY_WEAPONS), "A crappy bow."));
+            () -> new CustomBow(new Item.Properties().tab(ModCreativeModeTab.TOASTY_WEAPONS).stacksTo(1), "A crappy bow."));
 
     // wands
 
     public static final RegistryObject<Item> HONEY_WAND = ITEMS.register("honey_wand",
-            () -> new CustomWand(new Item.Properties().tab(ModCreativeModeTab.TOASTY_WEAPONS),
+            () -> new CustomWand(new Item.Properties().tab(ModCreativeModeTab.TOASTY_WEAPONS).stacksTo(1),
                     "A wand made of honey. Suprisingly, it's somewhat effective."));
 
     public static final RegistryObject<Item> WAND_OF_DESPAIR = ITEMS.register("wand_of_despair",
-            () -> new CustomWand(new Item.Properties().tab(ModCreativeModeTab.TOASTY_WEAPONS),
+            () -> new CustomWand(new Item.Properties().tab(ModCreativeModeTab.TOASTY_WEAPONS).stacksTo(1),
                     "Just holding this wand makes you want to crawl back into bed under your covers."));
 
 
@@ -112,40 +123,40 @@ public class ModItems {
     // spells
 
     public static final RegistryObject<Item> STARTER_SPELL = ITEMS.register("starter_spell",
-            () -> new CustomSpell(new Item.Properties().tab(ModCreativeModeTab.TOASTY_ABILITIES),
+            () -> new CustomSpell(new Item.Properties().tab(ModCreativeModeTab.TOASTY_ABILITIES).stacksTo(1),
                     "A pretty meh spell. Alright for beginners."));
 
     public static final RegistryObject<Item> SLITHERING_SPELL = ITEMS.register("slithering_spell",
-            () -> new CustomSpell(new Item.Properties().tab(ModCreativeModeTab.TOASTY_ABILITIES),
+            () -> new CustomSpell(new Item.Properties().tab(ModCreativeModeTab.TOASTY_ABILITIES).stacksTo(1),
                     "A spell used by the snakes. Quite a powerful spell."));
 
     public static final RegistryObject<Item> ZEUS_LIGHTNING_BOLT = ITEMS.register("zeus_lightning_bolt",
-            () -> new CustomSpell(new Item.Properties().tab(ModCreativeModeTab.TOASTY_ABILITIES),
+            () -> new CustomSpell(new Item.Properties().tab(ModCreativeModeTab.TOASTY_ABILITIES).stacksTo(1),
                     "Zeus' ultimate weapon. As stated by the Kairagi: Dancing Thunder, \"One strike should suffice.\""));
 
     // horns
 
     public static final RegistryObject<Item> STARTER_HORN = ITEMS.register("starter_horn",
-            () -> new CustomHorn(new Item.Properties().tab(ModCreativeModeTab.TOASTY_ABILITIES),
+            () -> new CustomHorn(new Item.Properties().tab(ModCreativeModeTab.TOASTY_ABILITIES).stacksTo(1),
                     "A good horn for motivating your peers."));
 
 
     public static final RegistryObject<Item> CONCH_OF_THE_SEAS = ITEMS.register("conch_of_the_seas",
-            () -> new CustomHorn(new Item.Properties().tab(ModCreativeModeTab.TOASTY_ABILITIES),
+            () -> new CustomHorn(new Item.Properties().tab(ModCreativeModeTab.TOASTY_ABILITIES).stacksTo(1),
                     "The ultimate horn used by Poseidon himself. Legend says that when used, nothing is impossible for affected entities."));
 
     // tomes
 
     public static final RegistryObject<Item> STARTER_TOME = ITEMS.register("starter_tome",
-            () -> new CustomTome(new Item.Properties().tab(ModCreativeModeTab.TOASTY_ABILITIES),
+            () -> new CustomTome(new Item.Properties().tab(ModCreativeModeTab.TOASTY_ABILITIES).stacksTo(1),
                     "Doesn't heal much, but it helps."));
 
     public static final RegistryObject<Item> HONEY_TOME = ITEMS.register("honey_tome",
-            () -> new CustomTome(new Item.Properties().tab(ModCreativeModeTab.TOASTY_ABILITIES),
+            () -> new CustomTome(new Item.Properties().tab(ModCreativeModeTab.TOASTY_ABILITIES).stacksTo(1),
                     "They say honey can help you heal."));
 
     public static final RegistryObject<Item> TOME_OF_DARKNESS = ITEMS.register("tome_of_darkness",
-            () -> new CustomTome(new Item.Properties().tab(ModCreativeModeTab.TOASTY_ABILITIES),
+            () -> new CustomTome(new Item.Properties().tab(ModCreativeModeTab.TOASTY_ABILITIES).stacksTo(1),
                     "A tome salvaged from the remains of The Despairing Dark. Unlike others, it doesn't heal much, but somehow does quite a bit of damage."));
 
 

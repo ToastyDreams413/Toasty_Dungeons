@@ -2,9 +2,15 @@ package net.jackchang.toastymod;
 
 import com.mojang.logging.LogUtils;
 import net.jackchang.toastymod.block.ModBlocks;
+import net.jackchang.toastymod.gui.Containers;
+import net.jackchang.toastymod.gui.backpack.large_backpack.LargeBackpackScreen;
+import net.jackchang.toastymod.gui.backpack.medium_backpack.MediumBackpackScreen;
+import net.jackchang.toastymod.gui.menu.MenuScreen;
+import net.jackchang.toastymod.gui.backpack.small_backpack.SmallBackpackScreen;
 import net.jackchang.toastymod.item.ModItems;
 import net.jackchang.toastymod.networking.ModMessages;
 import net.jackchang.toastymod.util.ModItemProperties;
+import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -26,6 +32,7 @@ public class ToastyMod {
 
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
+        Containers.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
         modEventBus.addListener(this::clientSetup);
@@ -41,6 +48,10 @@ public class ToastyMod {
 
     private void clientSetup(final FMLClientSetupEvent event) {
         ModItemProperties.addCustomItemProperties();
+        MenuScreens.register(Containers.MENU.get(), MenuScreen::new);
+        MenuScreens.register(Containers.SMALL_BACKPACK.get(), SmallBackpackScreen::new);
+        MenuScreens.register(Containers.MEDIUM_BACKPACK.get(), MediumBackpackScreen::new);
+        MenuScreens.register(Containers.LARGE_BACKPACK.get(), LargeBackpackScreen::new);
     }
 
     // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
