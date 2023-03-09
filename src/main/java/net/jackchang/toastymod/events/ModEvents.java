@@ -3,6 +3,7 @@ package net.jackchang.toastymod.events;
 import net.jackchang.toastymod.ToastyMod;
 import net.jackchang.toastymod.command.AdminGiveCommand;
 import net.jackchang.toastymod.command.GiftCommand;
+import net.jackchang.toastymod.command.PartyCommands;
 import net.jackchang.toastymod.command.WarpCommands;
 import net.jackchang.toastymod.custom_attributes.PlayerData;
 import net.jackchang.toastymod.custom_attributes.PlayerDataProvider;
@@ -40,6 +41,7 @@ public class ModEvents {
         new WarpCommands(event.getDispatcher());
         new GiftCommand(event.getDispatcher());
         new AdminGiveCommand(event.getDispatcher());
+        new PartyCommands(event.getDispatcher());
 
         ConfigCommand.register(event.getDispatcher());
     }

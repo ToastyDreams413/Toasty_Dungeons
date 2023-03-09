@@ -1,8 +1,10 @@
 package net.jackchang.toastymod.custom_attributes;
 
+import net.minecraft.client.player.Input;
 import net.minecraft.nbt.CompoundTag;
 
 import java.util.UUID;
+import java.util.ArrayList;
 
 public class PlayerData {
 
@@ -22,7 +24,8 @@ public class PlayerData {
     private int[] unlockedKingdoms;
     private boolean inParty;
     private UUID partyLeader;
-    private UUID[] party;
+    private ArrayList<UUID> partyMembers;
+    private ArrayList<UUID> partyInvitesSent;
 
     // attack, defense, health, mana, speed, evasion, luck of the soul
     private int atk, def, hp, mp, spd, eva, luckOfTheSoul;
@@ -43,7 +46,8 @@ public class PlayerData {
         unlockedKingdoms = new int[NUMBER_OF_KINGDOMS];
         inParty = false;
         partyLeader = null;
-        party = null;
+        partyMembers = new ArrayList<UUID>();
+        partyInvitesSent = new ArrayList<UUID>();
 
         atk = 0;
         def = 0;
@@ -66,6 +70,30 @@ public class PlayerData {
 
     public void setPlayerXP(int playerXP) { this.playerXP = playerXP; }
 
+    // party functions:
+    public void setInParty(boolean inParty) { this.inParty = inParty; }
+
+    public void setPartyLeader(UUID partyLeaderUUID) { this.partyLeader = partyLeaderUUID; }
+
+    public void setPartyMembers(ArrayList<UUID> partyMembers) {this.partyMembers = partyMembers; }
+
+    public void addPartyMember(UUID newPartyMemberUUID) { this.partyMembers.add(newPartyMemberUUID);  }
+
+    public void addAllPartyMembers(ArrayList<UUID> newPartyMembersUUIDs) { this.partyMembers.addAll(newPartyMembersUUIDs);  }
+
+    public void removePartyMember(UUID partyMemberToRemoveUUID) { this.partyMembers.remove(partyMemberToRemoveUUID); }
+
+    public void removeAllPartyMembers() { this.partyMembers.clear(); } 
+
+    public void setPartyInvitesSent(ArrayList<UUID> partyRequestsSent) {this.partyInvitesSent = partyRequestsSent; }
+
+    public void addPartyInviteSent(UUID newPartyInviteSentUUID) { this.partyInvitesSent.add(newPartyInviteSentUUID);  }
+
+    public void removePartyInviteSent(UUID partyInviteSentToRemoveUUID) { this.partyInvitesSent.remove(partyInviteSentToRemoveUUID); }
+
+    public void removeAllPartyInvitesSent() { this.partyInvitesSent.clear(); } 
+
+
     public int getShillings() {
         return shillings;
     }
@@ -84,6 +112,16 @@ public class PlayerData {
 
     public int getDef() { return def; }
 
+    // party functions:
+    public boolean getInParty() { return inParty; }
+
+    public UUID getPartyLeader() { return partyLeader; }
+
+    public ArrayList<UUID> getPartyMembers() { return partyMembers; }
+
+    public ArrayList<UUID> getPartyInvitesSent() { return partyInvitesSent; }
+
+
     public void increaseShillings() { shillings++; }
 
     public void increaseShillings(int amount) { shillings += amount; }
@@ -101,6 +139,7 @@ public class PlayerData {
     public void increasePlayerLevel() { playerLevel++; }
 
     public void increasePlayerLevel(int amount) { playerLevel += amount; }
+
 
     public void copyFrom(PlayerData source) {
         /*
