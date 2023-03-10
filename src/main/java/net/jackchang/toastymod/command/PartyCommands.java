@@ -22,6 +22,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 
 public class PartyCommands {
+
     public PartyCommands(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(Commands.literal("party").then(Commands.argument("option", StringArgumentType.string())
             .executes(ctx -> runCommand(ctx.getSource(), StringArgumentType.getString(ctx, "option"), null))
@@ -173,7 +174,9 @@ public class PartyCommands {
 
                     // disband party if only 2 members
                     if (playerData.getPartyMembers().size() == 2) {
-                        disbandParty(context, player, target, true);
+                        disbandParty(context, player, target, 1);
+
+                        return;
                     }
 
                     // sync with all party member's capabilities 
@@ -198,6 +201,7 @@ public class PartyCommands {
                         targetData.setInParty(false);
                         targetData.setPartyLeader(null);;
                         targetData.removeAllPartyMembers();
+                        targetData.setSelectedChat("all");
 
                         ModMessages.sendToPlayer(new PlayerDataSyncS2CPacket(targetData), target);
 
@@ -258,7 +262,7 @@ public class PartyCommands {
 				break;
 
             case "disband":
-                disbandParty(context, player, target, false);
+                disbandParty(context, player, target, 0);
                 
                 break;
 
@@ -272,6 +276,13 @@ public class PartyCommands {
 
                     if (playerData.getPartyLeader() == player.getUUID()) {
                         player.sendSystemMessage(Component.literal("You can't leave your own party").withStyle(ChatFormatting.RED));
+
+                        return;
+                    }
+
+                    // disband party if only 2 members
+                    if (playerData.getPartyMembers().size() == 2) {
+                        disbandParty(context, player, target, 2);
 
                         return;
                     }
@@ -297,6 +308,7 @@ public class PartyCommands {
                     playerData.setPartyLeader(null);
                     playerData.removeAllPartyMembers();
                     playerData.removeAllPartyInvitesSent();
+                    playerData.setSelectedChat("all");
 
                     ModMessages.sendToPlayer(new PlayerDataSyncS2CPacket(playerData), player);
 
@@ -337,10 +349,46 @@ public class PartyCommands {
         return 0;
     }
 
-    // Called in disband case and kick case if 2 members
-    static private void disbandParty(CommandSourceStack context, ServerPlayer player, ServerPlayer target, Boolean inKick) {        
+    /**
+    * Disbands the party.
+    * Called in the disband case and kick/leave cases if the party is made up of 2 members
+    *
+    * @param    context     the CommandSourceStack of the command it was invoked in
+    * @param    player      the ServerPlayer of the player who invoked the command
+    * @param    target      the ServerPlayer of the target of the command
+    * @param    fromMethod  an int which changes the message sent to party members. 0 = disband case, 1 = kick case, 2 = leave case
+    * @return               void
+    */
+    static private void disbandParty(CommandSourceStack context, ServerPlayer player, ServerPlayer target, int fromMethod) {     
+        String partyMembersMessage;
+        String playerMessage;
+        switch (fromMethod) {
+            // disband case
+            case 0:
+                partyMembersMessage = "The party you were in was disbanded";
+                playerMessage = partyMembersMessage;
+                break;
+
+            // kick case
+            case 1:
+                partyMembersMessage = "You have been kicked from the party";
+                playerMessage = "The party you were in was disbanded since you kicked the last member";
+                break;
+
+            // leave case
+            case 2:
+                partyMembersMessage = player.getName().getString() + " has left the party and the party was disbanded since the last member left";
+                playerMessage = "You have left the party";
+                break;
+
+            default:
+                partyMembersMessage = "";
+                playerMessage = "";
+                break;
+        }
+        
         player.getCapability(PlayerDataProvider.PLAYER_DATA).ifPresent(playerData -> {    
-            if (playerData.getPartyLeader() != player.getUUID()) {
+            if (playerData.getPartyLeader() != player.getUUID() && fromMethod != 2) {
                 player.sendSystemMessage(Component.literal("Only party leaders can disband a party").withStyle(ChatFormatting.RED));
 
                 return;
@@ -358,11 +406,12 @@ public class PartyCommands {
                         partyMemberData.setPartyLeader(null);
                         partyMemberData.removeAllPartyMembers();
                         partyMemberData.removeAllPartyInvitesSent();
+                        partyMemberData.setSelectedChat("all");
 
                         ModMessages.sendToPlayer(new PlayerDataSyncS2CPacket(partyMemberData), partyMember);
                     });
 
-                    partyMember.sendSystemMessage(Component.literal(inKick ? "You have been kicked from the party" : "The party you were in was disbanded").withStyle(ChatFormatting.GREEN));
+                    partyMember.sendSystemMessage(Component.literal(partyMembersMessage).withStyle(ChatFormatting.GREEN));
                 }
             }
 
@@ -370,10 +419,11 @@ public class PartyCommands {
             playerData.setPartyLeader(null);
             playerData.removeAllPartyMembers();
             playerData.removeAllPartyInvitesSent();
+            playerData.setSelectedChat("all");
 
             ModMessages.sendToPlayer(new PlayerDataSyncS2CPacket(playerData), player);
 
-            player.sendSystemMessage(Component.literal(inKick ? "The party you were in was disbanded since there were only 2 members" : "The party you were in was disbanded").withStyle(ChatFormatting.GREEN));
+            player.sendSystemMessage(Component.literal(playerMessage).withStyle(ChatFormatting.GREEN));
         });
     }
 }

@@ -2,6 +2,7 @@ package net.jackchang.toastymod.events;
 
 import net.jackchang.toastymod.ToastyMod;
 import net.jackchang.toastymod.command.AdminGiveCommand;
+import net.jackchang.toastymod.command.ChatCommands;
 import net.jackchang.toastymod.command.GiftCommand;
 import net.jackchang.toastymod.command.PartyCommands;
 import net.jackchang.toastymod.command.WarpCommands;
@@ -12,17 +13,21 @@ import net.jackchang.toastymod.data.SwordData;
 import net.jackchang.toastymod.item.custom.CustomSword;
 import net.jackchang.toastymod.networking.ModMessages;
 import net.jackchang.toastymod.networking.packet.PlayerDataSyncS2CPacket;
+
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+
 import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
+import net.minecraftforge.event.ServerChatEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
@@ -31,6 +36,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.server.command.ConfigCommand;
 
+import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Mod.EventBusSubscriber(modid = ToastyMod.MOD_ID)
@@ -42,6 +48,7 @@ public class ModEvents {
         new GiftCommand(event.getDispatcher());
         new AdminGiveCommand(event.getDispatcher());
         new PartyCommands(event.getDispatcher());
+        new ChatCommands(event.getDispatcher());
 
         ConfigCommand.register(event.getDispatcher());
     }
@@ -89,6 +96,24 @@ public class ModEvents {
                 });
             }
         }
+    }
+
+    @SubscribeEvent
+    public static void onServerChat(ServerChatEvent event) {
+        ServerPlayer player = event.getPlayer();
+
+        player.getCapability(PlayerDataProvider.PLAYER_DATA).ifPresent(playerData -> { 
+            if (playerData.getSelectedChat().equals("party")) {
+                ServerLevel level = player.getLevel();
+                for (UUID partyMemberUUID : playerData.getPartyMembers()) {
+                    ServerPlayer partyMember = (ServerPlayer) level.getPlayerByUUID(partyMemberUUID);
+
+                    partyMember.sendSystemMessage(Component.literal("Party <" + player.getName().getString() + "> " + event.getMessage()));
+                }
+
+                event.setCanceled(true);
+            }
+        });
     }
 
     @SubscribeEvent

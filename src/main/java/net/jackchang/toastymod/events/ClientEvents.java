@@ -6,7 +6,9 @@ import net.jackchang.toastymod.networking.ModMessages;
 import net.jackchang.toastymod.networking.packet.GivePlayerShillingsC2SPacket;
 import net.jackchang.toastymod.networking.packet.TestC2SPacket;
 import net.jackchang.toastymod.util.KeyBinding;
+
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.ClientChatEvent;
 import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
@@ -42,5 +44,4 @@ public class ClientEvents {
         }
 
     }
-
 }

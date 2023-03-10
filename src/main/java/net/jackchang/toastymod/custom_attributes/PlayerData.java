@@ -1,6 +1,5 @@
 package net.jackchang.toastymod.custom_attributes;
 
-import net.minecraft.client.player.Input;
 import net.minecraft.nbt.CompoundTag;
 
 import java.util.UUID;
@@ -26,6 +25,7 @@ public class PlayerData {
     private UUID partyLeader;
     private ArrayList<UUID> partyMembers;
     private ArrayList<UUID> partyInvitesSent;
+    private String selectedChat;
 
     // attack, defense, health, mana, speed, evasion, luck of the soul
     private int atk, def, hp, mp, spd, eva, luckOfTheSoul;
@@ -49,6 +49,8 @@ public class PlayerData {
         partyMembers = new ArrayList<UUID>();
         partyInvitesSent = new ArrayList<UUID>();
 
+        selectedChat = "all";
+
         atk = 0;
         def = 0;
         hp = 0;
@@ -69,6 +71,8 @@ public class PlayerData {
     public void setPlayerLevel(int playerLevel) { this.playerLevel = playerLevel; }
 
     public void setPlayerXP(int playerXP) { this.playerXP = playerXP; }
+
+    public void setSelectedChat(String selectedChat) { this.selectedChat = selectedChat; }
 
     // party functions:
     public void setInParty(boolean inParty) { this.inParty = inParty; }
@@ -111,6 +115,8 @@ public class PlayerData {
     public int getAtk() { return atk; }
 
     public int getDef() { return def; }
+
+    public String getSelectedChat() { return selectedChat; }
 
     // party functions:
     public boolean getInParty() { return inParty; }

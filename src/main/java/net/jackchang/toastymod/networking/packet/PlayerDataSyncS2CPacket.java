@@ -22,6 +22,7 @@ public class PlayerDataSyncS2CPacket {
         playerData.setShillings(buf.readInt());
         playerData.setGorbs(buf.readInt());
         playerData.setRank(buf.readInt());
+        playerData.setSelectedChat(buf.readUtf());
 
         // party
         Boolean inParty = buf.readBoolean();
@@ -53,6 +54,7 @@ public class PlayerDataSyncS2CPacket {
         buf.writeInt(playerData.getShillings());
         buf.writeInt(playerData.getGorbs());
         buf.writeInt(playerData.getRank());
+        buf.writeUtf(playerData.getSelectedChat());
 
         // party
         Boolean inParty = playerData.getInParty();
